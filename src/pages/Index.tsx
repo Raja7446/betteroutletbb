@@ -8,7 +8,7 @@ const Index = () => {
     <div className="h-screen w-screen overflow-hidden relative">
       {/* Background Layer - Fixed, non-scrollable */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
         style={{ backgroundImage: `url(${fintechBackground})` }}
       >
         {/* Overlay for depth */}
