@@ -14,7 +14,6 @@ const Login = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Navigate to welcome screen
     navigate("/welcome");
   };
 
@@ -52,7 +51,7 @@ const Login = () => {
                 placeholder="Enter your username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="h-12 bg-input-bg border-input-border focus:border-primary"
+                className="h-12 bg-input-bg border-input-border focus:border-primary text-text-primary placeholder:text-text-tertiary"
               />
             </div>
 
@@ -65,7 +64,7 @@ const Login = () => {
                   placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="h-12 bg-input-bg border-input-border focus:border-primary pr-12"
+                  className="h-12 bg-input-bg border-input-border focus:border-primary pr-12 text-text-primary placeholder:text-text-tertiary"
                 />
                 <button
                   type="button"

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import fintechBackground from "@/assets/fintech-background.jpg";
 
@@ -18,38 +18,34 @@ const Welcome = () => {
 
       {/* Content Layer */}
       <div className="relative z-10 h-full w-full flex items-center justify-center p-8">
-        <div className="w-full max-w-lg bg-card rounded-2xl floating-container p-10 animate-fade-in text-center">
+        <div className="w-full max-w-md bg-card rounded-2xl floating-container p-8 animate-fade-in text-center">
           {/* Logo */}
           <div className="flex items-center justify-center gap-3 mb-8">
-            <div className="w-14 h-14 rounded-xl bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-xl">BB</span>
+            <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center">
+              <span className="text-primary-foreground font-bold text-lg">BB</span>
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-text-primary">BB Lite</h1>
+              <p className="text-sm text-text-secondary">Outlet Analytics</p>
             </div>
           </div>
 
           {/* Welcome Message */}
-          <div className="space-y-4 mb-10">
-            <h1 className="text-3xl font-bold text-text-primary">
+          <div className="space-y-4 mb-8">
+            <h2 className="text-2xl font-bold text-text-primary">
               Hello Restaurant Owner 👋
-            </h1>
-            <p className="text-lg text-text-secondary leading-relaxed">
-              Welcome to the data feeding section of your profit journey with BB Lite.
+            </h2>
+            <p className="text-text-secondary leading-relaxed">
+              Welcome to the data feeding section of your profit journey
             </p>
-          </div>
-
-          {/* Decorative Element */}
-          <div className="flex justify-center mb-10">
-            <div className="flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full">
-              <Sparkles className="w-5 h-5 text-primary" />
-              <span className="text-sm font-medium text-primary">Let's set up your outlet</span>
-            </div>
           </div>
 
           {/* CTA Button */}
           <Button 
             onClick={() => navigate("/onboarding")}
-            className="h-14 px-8 text-base font-medium bg-primary hover:bg-primary/90 gap-2"
+            className="w-full h-12 text-base font-medium bg-primary hover:bg-primary/90 gap-2"
           >
-            Start Onboarding
+            Continue
             <ArrowRight className="w-5 h-5" />
           </Button>
         </div>

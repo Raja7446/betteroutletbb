@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { 
   LayoutDashboard, 
   Receipt, 
@@ -12,19 +13,24 @@ import { cn } from "@/lib/utils";
 interface NavItem {
   icon: React.ComponentType<{ className?: string }>;
   label: string;
-  active?: boolean;
+  id: string;
 }
 
 const navItems: NavItem[] = [
-  { icon: LayoutDashboard, label: "Dashboard" },
-  { icon: Receipt, label: "Daily Sales Data", active: true },
-  { icon: Wallet, label: "Expenses Data" },
-  { icon: Percent, label: "Discounts & Others" },
-  { icon: Activity, label: "Operational Metrics" },
-  { icon: BookOpen, label: "Margin References" },
+  { icon: LayoutDashboard, label: "Dashboard", id: "dashboard" },
+  { icon: Receipt, label: "Daily Sales Data", id: "daily-sales" },
+  { icon: Wallet, label: "Expenses Data", id: "expenses" },
+  { icon: Percent, label: "Discounts & Others", id: "discounts" },
+  { icon: Activity, label: "Operational Metrics", id: "operational" },
+  { icon: BookOpen, label: "Margin References", id: "margins" },
 ];
 
-export function Sidebar() {
+interface SidebarProps {
+  activeTab: string;
+  onTabChange: (tabId: string) => void;
+}
+
+export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
   return (
     <aside className="w-64 bg-sidebar flex flex-col border-r border-sidebar-border">
       {/* Logo */}
@@ -43,26 +49,30 @@ export function Sidebar() {
       {/* Navigation */}
       <nav className="flex-1 p-4">
         <div className="space-y-1">
-          {navItems.map((item) => (
-            <button
-              key={item.label}
-              className={cn(
-                "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200",
-                item.active
-                  ? "bg-sidebar-accent text-sidebar-primary"
-                  : "text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground"
-              )}
-            >
-              <item.icon className={cn(
-                "w-5 h-5 transition-colors",
-                item.active ? "text-sidebar-primary" : "text-sidebar-foreground"
-              )} />
-              <span className="flex-1 text-left">{item.label}</span>
-              {item.active && (
-                <ChevronRight className="w-4 h-4 text-sidebar-primary" />
-              )}
-            </button>
-          ))}
+          {navItems.map((item) => {
+            const isActive = activeTab === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => onTabChange(item.id)}
+                className={cn(
+                  "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200",
+                  isActive
+                    ? "bg-sidebar-accent text-sidebar-primary"
+                    : "text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground"
+                )}
+              >
+                <item.icon className={cn(
+                  "w-5 h-5 transition-colors",
+                  isActive ? "text-sidebar-primary" : "text-sidebar-foreground"
+                )} />
+                <span className="flex-1 text-left">{item.label}</span>
+                {isActive && (
+                  <ChevronRight className="w-4 h-4 text-sidebar-primary" />
+                )}
+              </button>
+            );
+          })}
         </div>
       </nav>
 

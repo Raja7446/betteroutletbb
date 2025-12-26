@@ -12,53 +12,49 @@ export function CongratsStep() {
   ];
 
   return (
-    <div className="space-y-8 animate-slide-up text-center max-w-lg mx-auto">
+    <div className="space-y-6 animate-slide-up text-center">
       {/* Celebration Icon */}
       <div className="flex justify-center">
-        <div className="w-24 h-24 rounded-3xl bg-primary/10 flex items-center justify-center">
-          <PartyPopper className="w-12 h-12 text-primary" />
+        <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center">
+          <PartyPopper className="w-10 h-10 text-primary" />
         </div>
       </div>
 
       {/* Headline */}
-      <div className="space-y-3">
-        <h2 className="text-3xl font-bold text-text-primary">
-          🎉 Onboarding Initiated Successfully!
+      <div className="space-y-2">
+        <h2 className="text-2xl font-bold text-text-primary">
+          🎉 Congratulations!
         </h2>
-        <p className="text-lg text-text-secondary leading-relaxed">
-          You've completed the initial setup. Please return to the BB Lite app to complete the final step and start your profit journey.
+        <p className="text-sm text-text-secondary leading-relaxed max-w-md mx-auto">
+          You've successfully initiated your onboarding. Please return to the BB Lite app to complete setup and start your profit journey.
         </p>
       </div>
 
       {/* Completed Steps */}
-      <div className="bg-surface rounded-xl p-6 border border-border">
-        <h4 className="text-sm font-medium text-text-tertiary mb-4 uppercase tracking-wider">
+      <div className="bg-surface rounded-xl p-4 border border-border max-w-sm mx-auto">
+        <h4 className="text-xs font-medium text-text-tertiary mb-3 uppercase tracking-wider">
           What you've completed
         </h4>
-        <div className="space-y-3">
+        <div className="space-y-2">
           {completedSteps.map((step, index) => (
-            <div key={index} className="flex items-center gap-3 text-left">
-              <CheckCircle className="w-5 h-5 text-success shrink-0" />
-              <span className="text-text-primary">{step}</span>
+            <div key={index} className="flex items-center gap-2 text-left">
+              <CheckCircle className="w-4 h-4 text-success shrink-0" />
+              <span className="text-sm text-text-primary">{step}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* CTA Button */}
-      <div className="pt-4">
+      <div className="pt-2">
         <Button
           onClick={() => navigate("/dashboard")}
-          className="h-14 px-10 text-base font-medium bg-primary hover:bg-primary/90 gap-2"
+          className="h-11 px-8 font-medium bg-primary hover:bg-primary/90 gap-2"
         >
-          Go to Daily Data Entry
-          <ArrowRight className="w-5 h-5" />
+          Next
+          <ArrowRight className="w-4 h-4" />
         </Button>
       </div>
-
-      <p className="text-sm text-text-tertiary">
-        You can now start entering your daily outlet data
-      </p>
     </div>
   );
 }

@@ -9,12 +9,12 @@ interface MenuUploadStepProps {
 
 interface UploadCardProps {
   title: string;
-  description: string;
+  subtitle: string;
   uploaded: boolean;
   onUpload: () => void;
 }
 
-function UploadCard({ title, description, uploaded, onUpload }: UploadCardProps) {
+function UploadCard({ title, subtitle, uploaded, onUpload }: UploadCardProps) {
   const [isDragging, setIsDragging] = useState(false);
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -35,7 +35,7 @@ function UploadCard({ title, description, uploaded, onUpload }: UploadCardProps)
   return (
     <div
       className={cn(
-        "flex-1 p-6 rounded-xl border-2 border-dashed transition-all duration-200",
+        "flex-1 p-6 rounded-xl border-2 border-dashed transition-all duration-200 min-h-[200px] flex flex-col",
         uploaded
           ? "border-success bg-success/5"
           : isDragging
@@ -46,22 +46,22 @@ function UploadCard({ title, description, uploaded, onUpload }: UploadCardProps)
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
-      <div className="flex flex-col items-center text-center">
+      <div className="flex flex-col items-center text-center flex-1 justify-center">
         <div
           className={cn(
-            "w-14 h-14 rounded-xl flex items-center justify-center mb-4 transition-colors",
+            "w-12 h-12 rounded-xl flex items-center justify-center mb-3 transition-colors",
             uploaded ? "bg-success/10" : "bg-primary/10"
           )}
         >
           {uploaded ? (
-            <Check className="w-7 h-7 text-success" />
+            <Check className="w-6 h-6 text-success" />
           ) : (
-            <Upload className="w-7 h-7 text-primary" />
+            <Upload className="w-6 h-6 text-primary" />
           )}
         </div>
 
-        <h3 className="text-lg font-semibold text-text-primary mb-1">{title}</h3>
-        <p className="text-sm text-text-secondary mb-4">{description}</p>
+        <h3 className="text-base font-semibold text-text-primary mb-1">{title}</h3>
+        <p className="text-sm text-text-secondary mb-4">{subtitle}</p>
 
         {uploaded ? (
           <div className="flex items-center gap-2 text-success">
@@ -91,33 +91,33 @@ export function MenuUploadStep({ onContinue }: MenuUploadStepProps) {
   const [onlineUploaded, setOnlineUploaded] = useState(false);
 
   return (
-    <div className="space-y-8 animate-slide-up">
+    <div className="space-y-6 animate-slide-up">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-text-primary mb-2">Upload Your Menus</h2>
-        <p className="text-text-secondary">
+        <h2 className="text-xl font-bold text-text-primary mb-2">Upload Your Menus</h2>
+        <p className="text-sm text-text-secondary">
           Upload your dine-in and online menus to help us understand your offerings
         </p>
       </div>
 
-      <div className="flex gap-6">
+      <div className="flex gap-4">
         <UploadCard
           title="Dine-in Menu"
-          description="Upload your physical restaurant menu"
+          subtitle="Physical restaurant menu"
           uploaded={dineInUploaded}
           onUpload={() => setDineInUploaded(true)}
         />
         <UploadCard
           title="Online Aggregator Menu"
-          description="Upload your Swiggy/Zomato menu"
+          subtitle="Swiggy / Zomato menu"
           uploaded={onlineUploaded}
           onUpload={() => setOnlineUploaded(true)}
         />
       </div>
 
-      <div className="flex justify-center pt-4">
+      <div className="flex justify-center pt-2">
         <Button
           onClick={onContinue}
-          className="h-12 px-8 bg-primary hover:bg-primary/90 gap-2"
+          className="h-11 px-6 bg-primary hover:bg-primary/90"
         >
           Continue to Next Step
         </Button>
