@@ -16,18 +16,23 @@ interface ExpenseEntry {
 
 const yearlyExpenseOptions = [
   "Lease / Rent",
-  "Licenses (FSSAI, Trade)",
-  "Annual Maintenance",
+  "FSSAI License",
+  "Trade License",
+  "Equipment AMC",
+  "Software Licenses",
   "Insurance",
-  "Other",
+  "Property Tax",
+  "Other (Custom)",
 ];
 
 const monthlyExpenseOptions = [
-  "Salaries",
-  "Electricity",
+  "Staff Salaries",
+  "Electricity Bill",
+  "Water Bill",
   "Internet",
-  "Water",
-  "Other",
+  "Maintenance",
+  "Accountant Fees",
+  "Other (Custom)",
 ];
 
 function ExpenseSection({
@@ -50,26 +55,26 @@ function ExpenseSection({
   onUpdate: (id: string, field: "type" | "amount", value: string) => void;
 }) {
   return (
-    <div className="p-6 bg-surface rounded-xl border border-border">
-      <div className="flex items-center gap-3 mb-2">
-        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-          <Icon className="w-5 h-5 text-primary" />
+    <div className="p-4 bg-surface rounded-xl border border-border">
+      <div className="flex items-center gap-3 mb-3">
+        <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+          <Icon className="w-4 h-4 text-primary" />
         </div>
         <div>
-          <h3 className="text-lg font-semibold text-text-primary">{title}</h3>
-          <p className="text-sm text-text-secondary">{description}</p>
+          <h3 className="text-sm font-semibold text-text-primary">{title}</h3>
+          <p className="text-xs text-text-secondary">{description}</p>
         </div>
       </div>
 
-      <div className="mt-4 space-y-3">
+      <div className="space-y-2 max-h-[120px] overflow-y-auto pr-1">
         {entries.map((entry) => (
-          <div key={entry.id} className="flex gap-3">
+          <div key={entry.id} className="flex gap-2">
             <Select
               value={entry.type}
               onValueChange={(value) => onUpdate(entry.id, "type", value)}
             >
-              <SelectTrigger className="flex-1 h-11 bg-card">
-                <SelectValue placeholder="Select expense type" />
+              <SelectTrigger className="flex-1 h-9 bg-card text-sm">
+                <SelectValue placeholder="Select expense" />
               </SelectTrigger>
               <SelectContent>
                 {options.map((option) => (
@@ -79,36 +84,36 @@ function ExpenseSection({
                 ))}
               </SelectContent>
             </Select>
-            <div className="relative w-40">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary">₹</span>
+            <div className="relative w-28">
+              <span className="absolute left-2 top-1/2 -translate-y-1/2 text-text-tertiary text-sm">₹</span>
               <Input
                 type="number"
                 placeholder="Amount"
                 value={entry.amount}
                 onChange={(e) => onUpdate(entry.id, "amount", e.target.value)}
-                className="h-11 pl-7 bg-card"
+                className="h-9 pl-6 bg-card text-sm"
               />
             </div>
             <Button
               variant="ghost"
               size="icon"
               onClick={() => onRemove(entry.id)}
-              className="h-11 w-11 text-destructive hover:text-destructive hover:bg-destructive/10"
+              className="h-9 w-9 text-destructive hover:text-destructive hover:bg-destructive/10 shrink-0"
             >
               <Trash2 className="w-4 h-4" />
             </Button>
           </div>
         ))}
-
-        <Button
-          variant="outline"
-          onClick={onAdd}
-          className="w-full h-11 border-dashed gap-2"
-        >
-          <Plus className="w-4 h-4" />
-          Add Expense
-        </Button>
       </div>
+
+      <Button
+        variant="outline"
+        onClick={onAdd}
+        className="w-full h-9 border-dashed gap-2 mt-2 text-sm"
+      >
+        <Plus className="w-4 h-4" />
+        Add Expense
+      </Button>
     </div>
   );
 }
@@ -126,7 +131,9 @@ export function FixedExpenseStep({ onContinue }: FixedExpenseStepProps) {
   };
 
   const removeYearlyExpense = (id: string) => {
-    setYearlyExpenses(yearlyExpenses.filter((e) => e.id !== id));
+    if (yearlyExpenses.length > 1) {
+      setYearlyExpenses(yearlyExpenses.filter((e) => e.id !== id));
+    }
   };
 
   const updateYearlyExpense = (id: string, field: "type" | "amount", value: string) => {
@@ -140,7 +147,9 @@ export function FixedExpenseStep({ onContinue }: FixedExpenseStepProps) {
   };
 
   const removeMonthlyExpense = (id: string) => {
-    setMonthlyExpenses(monthlyExpenses.filter((e) => e.id !== id));
+    if (monthlyExpenses.length > 1) {
+      setMonthlyExpenses(monthlyExpenses.filter((e) => e.id !== id));
+    }
   };
 
   const updateMonthlyExpense = (id: string, field: "type" | "amount", value: string) => {
@@ -150,15 +159,15 @@ export function FixedExpenseStep({ onContinue }: FixedExpenseStepProps) {
   };
 
   return (
-    <div className="space-y-8 animate-slide-up">
+    <div className="space-y-4 animate-slide-up">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-text-primary mb-2">Set Up Fixed Expenses</h2>
-        <p className="text-text-secondary">
+        <h2 className="text-xl font-bold text-text-primary mb-1">Set Up Fixed Expenses</h2>
+        <p className="text-sm text-text-secondary">
           These expenses will be distributed into your daily profit calculations
         </p>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-4">
         <ExpenseSection
           title="Yearly Fixed Expenses"
           icon={Calendar}
@@ -182,12 +191,12 @@ export function FixedExpenseStep({ onContinue }: FixedExpenseStepProps) {
         />
       </div>
 
-      <div className="flex justify-center pt-4">
+      <div className="flex justify-center pt-2">
         <Button
           onClick={onContinue}
-          className="h-12 px-8 bg-primary hover:bg-primary/90"
+          className="h-11 px-6 bg-primary hover:bg-primary/90"
         >
-          Save & Continue
+          Continue to Next Step
         </Button>
       </div>
     </div>

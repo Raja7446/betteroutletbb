@@ -48,13 +48,13 @@ const Onboarding = () => {
 
       {/* Content Layer */}
       <div className="relative z-10 h-full w-full flex items-center justify-center p-8">
-        <div className="w-full max-w-4xl bg-card rounded-2xl floating-container overflow-hidden animate-fade-in">
+        <div className="w-full max-w-4xl h-[600px] bg-card rounded-2xl floating-container overflow-hidden animate-fade-in flex flex-col">
           {/* Timeline Header */}
           <OnboardingTimeline currentStep={currentStep} onStepClick={handleStepClick} />
 
-          {/* Step Content */}
-          <div className="p-8 min-h-[500px] flex items-start justify-center">
-            <div className="w-full max-w-2xl">
+          {/* Step Content - Fixed height with internal scroll */}
+          <div className="flex-1 overflow-y-auto p-8">
+            <div className="w-full max-w-2xl mx-auto">
               {renderStep()}
             </div>
           </div>

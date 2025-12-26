@@ -42,17 +42,17 @@ export function SalesUploadStep({ onContinue }: SalesUploadStepProps) {
   };
 
   return (
-    <div className="space-y-8 animate-slide-up">
+    <div className="space-y-6 animate-slide-up">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-text-primary mb-2">Upload Past Sales Data</h2>
-        <p className="text-text-secondary">
-          Upload last 3 months sales reports from PetPooja to kickstart your analytics
+        <h2 className="text-xl font-bold text-text-primary mb-2">Upload Past Sales Data</h2>
+        <p className="text-sm text-text-secondary">
+          Upload your last 3 months sales report from PetPooja
         </p>
       </div>
 
       <div
         className={cn(
-          "p-12 rounded-xl border-2 border-dashed transition-all duration-200",
+          "p-10 rounded-xl border-2 border-dashed transition-all duration-200",
           uploaded
             ? "border-success bg-success/5"
             : isDragging
@@ -66,21 +66,21 @@ export function SalesUploadStep({ onContinue }: SalesUploadStepProps) {
         <div className="flex flex-col items-center text-center">
           <div
             className={cn(
-              "w-20 h-20 rounded-2xl flex items-center justify-center mb-6 transition-colors",
+              "w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-colors",
               uploaded ? "bg-success/10" : "bg-primary/10"
             )}
           >
             {uploaded ? (
-              <Check className="w-10 h-10 text-success" />
+              <Check className="w-8 h-8 text-success" />
             ) : (
-              <FileSpreadsheet className="w-10 h-10 text-primary" />
+              <FileSpreadsheet className="w-8 h-8 text-primary" />
             )}
           </div>
 
           {uploaded ? (
             <div className="space-y-2">
-              <h3 className="text-xl font-semibold text-success">Upload Complete!</h3>
-              <p className="text-text-secondary">Your sales data has been uploaded successfully</p>
+              <h3 className="text-lg font-semibold text-success">Upload Complete!</h3>
+              <p className="text-sm text-text-secondary">Your sales data has been uploaded successfully</p>
             </div>
           ) : uploadProgress > 0 && uploadProgress < 100 ? (
             <div className="w-full max-w-xs space-y-3">
@@ -94,10 +94,10 @@ export function SalesUploadStep({ onContinue }: SalesUploadStepProps) {
             </div>
           ) : (
             <>
-              <h3 className="text-xl font-semibold text-text-primary mb-2">
+              <h3 className="text-lg font-semibold text-text-primary mb-2">
                 Drag & drop your sales file here
               </h3>
-              <p className="text-text-secondary mb-6">or click to browse from your computer</p>
+              <p className="text-sm text-text-secondary mb-4">or click to browse from your computer</p>
 
               <label className="cursor-pointer">
                 <input
@@ -106,13 +106,13 @@ export function SalesUploadStep({ onContinue }: SalesUploadStepProps) {
                   onChange={simulateUpload}
                   accept=".pdf,.xlsx,.csv"
                 />
-                <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-xl font-medium hover:bg-primary/90 transition-colors">
-                  <Upload className="w-5 h-5" />
+                <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-xl font-medium hover:bg-primary/90 transition-colors text-sm">
+                  <Upload className="w-4 h-4" />
                   Choose File
                 </div>
               </label>
 
-              <p className="text-xs text-text-tertiary mt-4">
+              <p className="text-xs text-text-tertiary mt-3">
                 Supported formats: PDF, Excel (.xlsx), CSV
               </p>
             </>
@@ -120,12 +120,12 @@ export function SalesUploadStep({ onContinue }: SalesUploadStepProps) {
         </div>
       </div>
 
-      <div className="flex justify-center pt-4">
+      <div className="flex justify-center pt-2">
         <Button
           onClick={onContinue}
-          className="h-12 px-8 bg-primary hover:bg-primary/90"
+          className="h-11 px-6 bg-primary hover:bg-primary/90"
         >
-          Submit & Complete Onboarding
+          Submit & Finish Onboarding
         </Button>
       </div>
     </div>

@@ -10,6 +10,10 @@ export function DailySalesForm() {
   const [dineInRevenue, setDineInRevenue] = useState("");
   const [onlineOrders, setOnlineOrders] = useState("");
   const [onlineRevenue, setOnlineRevenue] = useState("");
+  const [swiggyOrders, setSwiggyOrders] = useState("");
+  const [swiggyRevenue, setSwiggyRevenue] = useState("");
+  const [zomatoOrders, setZomatoOrders] = useState("");
+  const [zomatoRevenue, setZomatoRevenue] = useState("");
 
   const handleSave = () => {
     toast.success("Daily sales data saved successfully", {
@@ -22,6 +26,10 @@ export function DailySalesForm() {
     setDineInRevenue("");
     setOnlineOrders("");
     setOnlineRevenue("");
+    setSwiggyOrders("");
+    setSwiggyRevenue("");
+    setZomatoOrders("");
+    setZomatoRevenue("");
     toast.info("Form has been reset");
   };
 
@@ -30,7 +38,7 @@ export function DailySalesForm() {
   const totalRevenue = (parseFloat(dineInRevenue) || 0) + (parseFloat(onlineRevenue) || 0);
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-8">
       {/* Dine-in Orders Section */}
       <DataSection
         icon={UtensilsCrossed}
@@ -66,26 +74,70 @@ export function DailySalesForm() {
         subtitle="Delivery and pickup orders via apps"
         accentColor="success"
       >
-        <div className="grid grid-cols-2 gap-6">
-          <DataInput
-            label="Number of Orders"
-            placeholder="0"
-            suffix="orders"
-            value={onlineOrders}
-            onChange={setOnlineOrders}
-          />
-          <DataInput
-            label="Total Revenue"
-            placeholder="0.00"
-            prefix="₹"
-            value={onlineRevenue}
-            onChange={setOnlineRevenue}
-          />
+        <div className="space-y-6">
+          {/* Overall Online */}
+          <div className="grid grid-cols-2 gap-6">
+            <DataInput
+              label="Online Orders Count"
+              placeholder="0"
+              suffix="orders"
+              value={onlineOrders}
+              onChange={setOnlineOrders}
+            />
+            <DataInput
+              label="Online Revenue"
+              placeholder="0.00"
+              prefix="₹"
+              value={onlineRevenue}
+              onChange={setOnlineRevenue}
+            />
+          </div>
+
+          {/* Aggregator Breakdown */}
+          <div className="bg-surface/50 rounded-xl p-4 border border-border/50">
+            <p className="text-xs font-medium text-text-tertiary uppercase tracking-wider mb-4">
+              Platform Breakdown (Optional)
+            </p>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-4">
+                <DataInput
+                  label="Swiggy Orders"
+                  placeholder="0"
+                  suffix="orders"
+                  value={swiggyOrders}
+                  onChange={setSwiggyOrders}
+                />
+                <DataInput
+                  label="Swiggy Revenue"
+                  placeholder="0.00"
+                  prefix="₹"
+                  value={swiggyRevenue}
+                  onChange={setSwiggyRevenue}
+                />
+              </div>
+              <div className="space-y-4">
+                <DataInput
+                  label="Zomato Orders"
+                  placeholder="0"
+                  suffix="orders"
+                  value={zomatoOrders}
+                  onChange={setZomatoOrders}
+                />
+                <DataInput
+                  label="Zomato Revenue"
+                  placeholder="0.00"
+                  prefix="₹"
+                  value={zomatoRevenue}
+                  onChange={setZomatoRevenue}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </DataSection>
 
       {/* Summary Bar */}
-      <div className="bg-secondary/30 rounded-2xl p-6 mt-8">
+      <div className="bg-secondary/30 rounded-2xl p-6 mt-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-12">
             <div>
