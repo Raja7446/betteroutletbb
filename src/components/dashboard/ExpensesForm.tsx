@@ -91,12 +91,12 @@ export function ExpensesForm() {
                 Expense Type
               </label>
               <Select value={selectedType} onValueChange={setSelectedType}>
-                <SelectTrigger className="h-11 bg-input border-input">
-                  <SelectValue placeholder="Select type" />
+                <SelectTrigger className="h-11 bg-background border-border text-foreground">
+                  <SelectValue placeholder="Select type" className="text-muted-foreground" />
                 </SelectTrigger>
                 <SelectContent className="bg-card border-border z-50">
                   {expenseTypes.map((type) => (
-                    <SelectItem key={type} value={type}>
+                    <SelectItem key={type} value={type} className="text-foreground">
                       {type}
                     </SelectItem>
                   ))}
@@ -114,7 +114,7 @@ export function ExpensesForm() {
                   placeholder="Enter expense name"
                   value={customName}
                   onChange={(e) => setCustomName(e.target.value)}
-                  className="h-11 bg-input border-input"
+                  className="h-11 bg-background border-border text-foreground placeholder:text-muted-foreground"
                 />
               </div>
             )}
@@ -131,7 +131,7 @@ export function ExpensesForm() {
                   placeholder="0.00"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="h-11 pl-7 bg-input border-input"
+                  className="h-11 pl-7 bg-background border-border text-foreground placeholder:text-muted-foreground"
                 />
               </div>
             </div>

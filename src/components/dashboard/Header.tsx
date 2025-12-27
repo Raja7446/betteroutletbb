@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Calendar, ChevronDown, Bell, User, Check } from "lucide-react";
+import { Calendar, ChevronDown, Bell, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import {
@@ -32,8 +32,7 @@ const outlets = [
 export function Header({ selectedDate, onDateChange }: HeaderProps) {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
-  const [isOutletOpen, setIsOutletOpen] = useState(false);
-  const [selectedOutlet, setSelectedOutlet] = useState(outlets[0]);
+  const selectedOutlet = outlets[0]; // Display only, not editable
 
   const formattedDate = format(selectedDate, "EEEE, MMMM d, yyyy");
 
@@ -122,54 +121,16 @@ export function Header({ selectedDate, onDateChange }: HeaderProps) {
         
         <div className="h-6 w-px bg-border" />
         
-        {/* Outlet Selector */}
-        <Popover open={isOutletOpen} onOpenChange={setIsOutletOpen}>
-          <PopoverTrigger asChild>
-            <button className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-secondary/50 transition-colors">
-              <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
-                <User className="w-4 h-4 text-primary" />
-              </div>
-              <div className="text-left">
-                <p className="text-sm font-medium text-card-foreground">{selectedOutlet.name}</p>
-                <p className="text-xs text-muted-foreground">{selectedOutlet.role}</p>
-              </div>
-              <ChevronDown className="w-4 h-4 text-muted-foreground" />
-            </button>
-          </PopoverTrigger>
-          <PopoverContent className="w-64 p-2 bg-card border-border z-50" align="end">
-            <div className="space-y-1">
-              {outlets.map((outlet) => (
-                <button
-                  key={outlet.id}
-                  onClick={() => {
-                    setSelectedOutlet(outlet);
-                    setIsOutletOpen(false);
-                  }}
-                  className={cn(
-                    "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left",
-                    selectedOutlet.id === outlet.id
-                      ? "bg-primary/10 text-primary"
-                      : "hover:bg-secondary/50 text-card-foreground"
-                  )}
-                >
-                  <div className={cn(
-                    "w-8 h-8 rounded-full flex items-center justify-center",
-                    selectedOutlet.id === outlet.id ? "bg-primary/20" : "bg-secondary"
-                  )}>
-                    <User className="w-3.5 h-3.5" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate">{outlet.name}</p>
-                    <p className="text-xs text-muted-foreground">{outlet.role}</p>
-                  </div>
-                  {selectedOutlet.id === outlet.id && (
-                    <Check className="w-4 h-4 text-primary shrink-0" />
-                  )}
-                </button>
-              ))}
-            </div>
-          </PopoverContent>
-        </Popover>
+        {/* Outlet Display (Read-only) */}
+        <div className="flex items-center gap-3 px-3 py-2">
+          <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
+            <User className="w-4 h-4 text-primary" />
+          </div>
+          <div className="text-left">
+            <p className="text-sm font-medium text-card-foreground">{selectedOutlet.name}</p>
+            <p className="text-xs text-muted-foreground">{selectedOutlet.role}</p>
+          </div>
+        </div>
       </div>
     </header>
   );
