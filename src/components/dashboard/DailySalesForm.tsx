@@ -38,15 +38,15 @@ export function DailySalesForm() {
   const totalRevenue = (parseFloat(dineInRevenue) || 0) + (parseFloat(onlineRevenue) || 0);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-5">
       {/* Dine-in Orders Section */}
       <DataSection
         icon={UtensilsCrossed}
         title="Dine-in Orders"
-        subtitle="Walk-in customers and table service"
+        subtitle="Walk-in customers"
         accentColor="primary"
       >
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-4">
           <DataInput
             label="Number of Orders"
             placeholder="0"
@@ -64,19 +64,16 @@ export function DailySalesForm() {
         </div>
       </DataSection>
 
-      {/* Divider */}
-      <div className="border-t border-border/50" />
-
       {/* Online Orders Section */}
       <DataSection
         icon={Smartphone}
         title="Online Orders"
-        subtitle="Delivery and pickup orders via apps"
+        subtitle="Delivery and pickup"
         accentColor="success"
       >
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* Overall Online */}
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-4">
             <DataInput
               label="Online Orders Count"
               placeholder="0"
@@ -94,66 +91,60 @@ export function DailySalesForm() {
           </div>
 
           {/* Aggregator Breakdown */}
-          <div className="bg-surface/50 rounded-xl p-4 border border-border/50">
-            <p className="text-xs font-medium text-text-tertiary uppercase tracking-wider mb-4">
+          <div className="bg-secondary/30 rounded-xl p-4 border border-border/30">
+            <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">
               Platform Breakdown (Optional)
             </p>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <DataInput
-                  label="Swiggy Orders"
-                  placeholder="0"
-                  suffix="orders"
-                  value={swiggyOrders}
-                  onChange={setSwiggyOrders}
-                />
-                <DataInput
-                  label="Swiggy Revenue"
-                  placeholder="0.00"
-                  prefix="₹"
-                  value={swiggyRevenue}
-                  onChange={setSwiggyRevenue}
-                />
-              </div>
-              <div className="space-y-4">
-                <DataInput
-                  label="Zomato Orders"
-                  placeholder="0"
-                  suffix="orders"
-                  value={zomatoOrders}
-                  onChange={setZomatoOrders}
-                />
-                <DataInput
-                  label="Zomato Revenue"
-                  placeholder="0.00"
-                  prefix="₹"
-                  value={zomatoRevenue}
-                  onChange={setZomatoRevenue}
-                />
-              </div>
+            <div className="grid grid-cols-4 gap-3">
+              <DataInput
+                label="Swiggy Orders"
+                placeholder="0"
+                value={swiggyOrders}
+                onChange={setSwiggyOrders}
+              />
+              <DataInput
+                label="Swiggy Revenue"
+                placeholder="0.00"
+                prefix="₹"
+                value={swiggyRevenue}
+                onChange={setSwiggyRevenue}
+              />
+              <DataInput
+                label="Zomato Orders"
+                placeholder="0"
+                value={zomatoOrders}
+                onChange={setZomatoOrders}
+              />
+              <DataInput
+                label="Zomato Revenue"
+                placeholder="0.00"
+                prefix="₹"
+                value={zomatoRevenue}
+                onChange={setZomatoRevenue}
+              />
             </div>
           </div>
         </div>
       </DataSection>
 
       {/* Summary Bar */}
-      <div className="bg-secondary/30 rounded-2xl p-6 mt-6">
+      <div className="bg-secondary/30 rounded-xl p-5">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-12">
+          <div className="flex items-center gap-10">
             <div>
-              <p className="text-xs font-medium text-text-tertiary uppercase tracking-wider mb-1">
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
                 Total Orders
               </p>
-              <p className="text-3xl font-bold text-text-primary input-number">
+              <p className="text-2xl font-bold text-card-foreground input-number">
                 {totalOrders}
               </p>
             </div>
-            <div className="h-12 w-px bg-border" />
+            <div className="h-10 w-px bg-border" />
             <div>
-              <p className="text-xs font-medium text-text-tertiary uppercase tracking-wider mb-1">
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
                 Total Revenue
               </p>
-              <p className="text-3xl font-bold text-primary input-number">
+              <p className="text-2xl font-bold text-primary input-number">
                 ₹{totalRevenue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
               </p>
             </div>
@@ -164,7 +155,7 @@ export function DailySalesForm() {
             <Button
               variant="outline"
               onClick={handleReset}
-              className="gap-2 text-text-secondary hover:text-text-primary"
+              className="gap-2 text-muted-foreground hover:text-card-foreground"
             >
               <RotateCcw className="w-4 h-4" />
               Reset

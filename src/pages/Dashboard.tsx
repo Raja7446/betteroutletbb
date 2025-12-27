@@ -16,7 +16,7 @@ const tabConfig: Record<string, { title: string; subtitle: string }> = {
   },
   "daily-sales": {
     title: "Daily Sales Data",
-    subtitle: "Enter your outlet's daily sales figures for accurate reporting"
+    subtitle: "Enter your outlet's daily sales figures"
   },
   "expenses": {
     title: "Expenses Data",
@@ -28,16 +28,26 @@ const tabConfig: Record<string, { title: string; subtitle: string }> = {
   },
   "operational": {
     title: "Operational Metrics",
-    subtitle: "Track order issues, preparation time, and customer feedback"
+    subtitle: "Track order issues, preparation time, and feedback"
   },
   "margins": {
     title: "Margin References",
-    subtitle: "Set up item-wise cost and pricing for margin tracking"
+    subtitle: "Set up item-wise cost and pricing"
   }
+};
+
+// Get today's date in IST
+const getISTDate = () => {
+  const now = new Date();
+  // IST is UTC+5:30
+  const istOffset = 5.5 * 60 * 60 * 1000;
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60 * 1000);
+  return new Date(utc + istOffset);
 };
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("daily-sales");
+  const [selectedDate, setSelectedDate] = useState<Date>(getISTDate());
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -81,16 +91,16 @@ const Dashboard = () => {
           {/* Main Content Area */}
           <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
             {/* Header - Fixed */}
-            <Header />
+            <Header selectedDate={selectedDate} onDateChange={setSelectedDate} />
 
             {/* Page Content - Scrollable */}
             <main className="flex-1 p-8 overflow-y-auto">
               {/* Page Title */}
-              <div className="mb-8">
-                <h1 className="text-2xl font-bold text-text-primary">
+              <div className="mb-6">
+                <h1 className="text-2xl font-bold text-card-foreground">
                   {currentTab.title}
                 </h1>
-                <p className="text-text-secondary mt-1">
+                <p className="text-muted-foreground mt-1">
                   {currentTab.subtitle}
                 </p>
               </div>
@@ -103,7 +113,7 @@ const Dashboard = () => {
 
             {/* Footer - Fixed */}
             <footer className="shrink-0 px-8 py-4 border-t border-border/30">
-              <div className="flex items-center justify-between text-xs text-text-tertiary">
+              <div className="flex items-center justify-between text-xs text-muted-foreground">
                 <span>Last saved: Not yet saved today</span>
                 <span>All data is securely stored</span>
               </div>
